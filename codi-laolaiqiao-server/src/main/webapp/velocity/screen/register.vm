@@ -1,0 +1,103 @@
+<form action="/user/saveUser" method="post" name="user">
+	
+	<div class="mui-content">
+		<input type="hidden" name="openId" value="$!openId" />
+		<div align="center" id="backgroundImage" style="background-color:white;" height="300px">
+			<img src="../static/image/logo.png" width="38%" vertical-align:middle/>
+		</div>
+		<!-- 第一步 -->
+		<div class="mui-input-group reg-step1">
+			<div class="mui-input-row">
+				<label>姓名</label>
+				<input id='userName' type="text" class="mui-input-clear mui-input" name="userName" placeholder="您的姓名" maxlength="10">
+			</div>
+			<div class="mui-input-row">
+				<label>手机号码</label>
+				<input id='mobile' type="text" class="mui-input-clear mui-input" name="userMobile" placeholder="不可变更，请谨慎填写" maxlength="11">
+			</div>
+			<div class="mui-input-row">
+				<label>推荐人</label>
+				<input type="text" class="mui-input-clear mui-input" name="reference" placeholder="非必填" maxlength="10">
+			</div>
+		</div>	
+		
+		<!-- 第二步 -->
+		<div class="mui-input-group mui-hidden reg-step2">
+			<div class="mui-input-row hobby-row">
+				<div class="row-title hobby-title">您的个人爱好是：</div>
+				<div class="hobby">
+					#foreach($hobby in $!hobbies)
+						<span class="mui-badge">$hobby.constKey</span>
+					#end
+				</div>
+				<input type="hidden" name="hobby" id="hobby">
+			</div>
+		</div>	
+			
+			<!-- 第三步 -->
+		<div class="mui-input-group mui-hidden reg-step3">
+			<div class="input-block">
+				<div class="row-title">性别：</div>
+				<div class="mui-input-row mui-radio mui-left">
+					<label>男</label>
+					<input value="男" type="radio" name="sex" checked>
+				</div>
+				<div class="mui-input-row mui-radio mui-left">
+				  <label>女</label>
+				  <input value="女" type="radio" name="sex">
+				</div>
+			</div>
+			
+			<div class="input-block">
+				<div class="row-title">出生日期：</div>
+				<div class="mui-input-row">
+					<label>日期</label>
+					<input type="text" data-options='{"type":"date","beginYear":1900,"endYear":2020}' name="birthday" class="mui-input js-date" placeholder="请选择日期" readonly>
+				</div>
+			</div>
+			
+			<div class="input-block">
+				<div class="row-title">所在区域：</div>
+				<div class="mui-input-row">
+					<label>省</label>
+					<input id='province' type="text" class="mui-input js-area"  name="province" readonly>
+					<input id="provinceHidden" type="hidden" name="provinceCode">
+				</div>
+				<div class="mui-input-row">
+					<label>市</label>
+					<input id="city" type="text" class="mui-input js-area" name="city" readonly>
+					<input id="cityHidden" type="hidden" name="cityCode">
+				</div>
+				<div class="mui-input-row">
+					<label>县/区</label>
+					<input id="country" type="text" class="mui-input js-area" name="region" readonly>
+					<input id="countryHidden" type="hidden" name="regionCode">
+				</div>
+				<div class="mui-input-row">
+					<label>镇/街道</label>
+					<input id="street" type="text" class="mui-input js-area" name="street" readonly>
+					<input id="streetHidden" type="hidden" name="streetCode">
+				</div>
+			</div>
+			
+			<div class="input-block">
+				<div class="row-title">所在社区：</div>
+				<div class="mui-input-row">
+					<label>社区名称</label>
+					<input  type="text" class="mui-input-clear mui-input" name="community" placeholder="例:幸福小区"  maxlength="50">
+				</div>
+			</div>
+			
+		</div>
+		
+		<div class="mui-content-padded">
+			<a class="mui-btn mui-btn-block mui-btn-primary" step=1>确定</a>
+		</div>
+	</div>
+</form>	
+<script src="../static/comm/mui/js/mui.picker.min.js"></script>
+<script src="../static/comm/mui/js/mui.poppicker.js"></script>
+<script src="../static/comm/mui/js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+<script src="../static/js/Picker.js"></script>
+<script src="../static/js/register.js"></script>
+<script src="../static/js/userCommon.js"></script>

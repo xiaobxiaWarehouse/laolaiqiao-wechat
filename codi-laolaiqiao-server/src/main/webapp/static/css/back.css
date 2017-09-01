@@ -1,0 +1,12 @@
+.content-title {
+	margin-bottom:10px;
+}
+
+.wechat-url {
+    max-width: 200px;
+    word-break: break-all;
+}
+
+#chkThirdParty {
+	cursor:pointer;
+}

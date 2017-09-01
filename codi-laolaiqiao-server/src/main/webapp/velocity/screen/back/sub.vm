@@ -1,0 +1,202 @@
+#set($layout="/layout/menu.vm")
+<!-- begin #page-container -->
+	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
+		<!-- begin #header -->
+		<div id="header" class="header navbar navbar-default navbar-fixed-top">
+			<!-- begin container-fluid -->
+			<div class="container-fluid">
+				<!-- begin mobile sidebar expand / collapse button -->
+				<div class="navbar-header">
+					<a href="javascript:void(0);" class="navbar-brand"><span class="navbar-logo"></span>老来俏管理后台</a>
+					<button type="button" class="navbar-toggle" data-click="sidebar-toggled">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<!-- end mobile sidebar expand / collapse button -->
+				
+				<!-- begin header navigation right -->
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown navbar-user">
+						<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+							<img src="../static/assets/img/user-13.jpg" alt="" /> 
+							<span class="hidden-xs">laolaiqiao-admin</span></b>
+						</a>
+					</li>
+				</ul>
+				<!-- end header navigation right -->
+			</div>
+			<!-- end container-fluid -->
+		</div>
+		<!-- end #header -->
+		
+		<!-- begin #sidebar -->
+		<div id="sidebar" class="sidebar">
+			<!-- begin sidebar scrollbar -->
+			<div data-scrollbar="true" data-height="100%">
+				<!-- begin sidebar user -->
+				<ul class="nav">
+					<li class="nav-profile">
+						<div class="image">
+							<a href="javascript:void(0);"><img src="../static/assets/img/user-13.jpg" alt="" /></a>
+						</div>
+						<div class="info">laolaiqiao-admin</div>
+					</li>
+				</ul>
+				<!-- end sidebar user -->
+				<!-- begin sidebar nav -->
+				<ul class="nav">
+					<li class="nav-header">菜单</li>
+					<li class="has-sub #if($menu == 'top')active #end">
+						<a href="showTopMenu">
+						    <i class="fa fa-suitcase"></i>
+						    <span>一级菜单</span> 
+						</a>
+					</li>
+					<li class="has-sub #if($menu == 'sub')active #end">
+						<a href="showSubMenu">
+							<i class="fa fa-inbox"></i> 
+							<span>二级菜单</span>
+						</a>
+					</li>
+					<li class="has-sub #if($menu == 'wechatRegister')active #end">
+						<a href="showWelcomeNews">
+							<i class="fa fa-inbox"></i> 
+							<span>注册地址</span>
+						</a>
+					</li>
+					<li class="has-sub #if($menu == 'showNewsSearch')active #end">
+						<a href="showNewsSearch">
+							<i class="fa fa-inbox"></i> 
+							<span>图文搜索</span>
+						</a>
+					</li>
+					<li class="has-sub #if($menu == 'userStatistics')active #end">
+						<a href="showUserStatistics">
+							<i class="fa fa-inbox"></i> 
+							<span>用户统计</span>
+						</a>
+					</li>
+			        <!-- begin sidebar minify button -->
+					<li><a href="javascript:void(0);" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
+			        <!-- end sidebar minify button -->
+				</ul>
+				<!-- end sidebar nav -->
+			</div>
+			<!-- end sidebar scrollbar -->
+		</div>
+		<div class="sidebar-bg"></div>
+		<!-- end #sidebar -->
+		
+		<!-- begin #content -->
+		<div id="content" class="content">
+			<div class="content-title"><button id="addBtn" type="button" class="btn btn-info">新增</button></div>
+			<table class="table table-bordered">
+			<thead>
+			    <tr>
+			      <th style="width:5%">序号</th>
+			      <th style="width:15%">父菜单名称</th>
+			      <th style="width:18%">菜单名称</th>
+			      <th class="wechat-url">URL</th>
+			      <th style="width:15%"></th>
+			    </tr>
+			</thead>
+			<tbody>
+				#foreach($menu in $!subMenus)
+					<tr>
+				      <td>$!{velocityCount}</td>
+				      <td parentName="$!{menu.parentName}">$!{menu.parentName}</td>
+				      <td name="$!{menu.name}">$!{menu.name}</td>
+				      <td url="$!{menu.url}" class="wechat-url">$!{menu.url}</td>
+				      <td>
+				      	<button type="button" class="btn btn-primary js-modify">修改</button>
+				      	<button type="button" class="btn btn-danger js-delete">删除</button>
+				      </td>
+				    </tr>
+				#end
+			</tbody>
+			</table>
+		</div>
+		<!-- end #content -->
+		
+		<!-- begin scroll to top btn -->
+		<a href="javascript:void(0);" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+		<!-- end scroll to top btn -->
+	</div>
+	
+	<!-- 新增模态框（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	                <h4 class="modal-title" id="myModalLabel">新增子菜单</h4>
+	            </div>
+	            <div class="modal-body">
+	            	<form role="form" id="menuForm"></form>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	                <button type="button" class="btn btn-primary js-save">保存</button>
+	            </div>
+	        </div><!-- /.modal-content -->
+	    </div><!-- /.modal-dialog -->
+	</div>
+	
+	<script id="tpl" type="text/x-handlebars-template">  
+		<div class="form-group">
+		    <label for="type">上级菜单</label>
+		    <div class="dropdown">
+			    <button type="button" class="btn dropdown-toggle" id="dropdownParent" data-toggle="dropdown">
+			    	<span class="js-text">{{parentName}}</span>
+			        <span class="caret"></span>
+			    </button>
+			    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownParent">
+			        {{#each topMenus}}
+				        <li role="presentation">
+				            <a role="menuitem" tabindex="-1" href="#" value="{{this.name}}">{{this.name}}</a>
+				        </li>
+			        {{/each}}
+			    </ul>
+			    <input type="hidden" name="parentName" hiddenType="dropdownParent" value="{{parentName}}" />
+			    <input type="hidden" name="oldParentName" value="{{parentName}}" />
+			</div>
+		  </div>
+		  <div class="form-group">
+		    <label for="name">菜单名称</label>
+		    <input type="text" class="form-control" id="name" name="name" placeholder="菜单名称" value="{{menuName}}">
+		    <input type="hidden" name="oldName" value="{{menuName}}" />
+		  </div>
+		  <div class="form-group js-view" id="chkThirdParty">
+			    <input type="checkbox" /> 外部链接
+		  </div>
+		  <div class="form-group js-view" id="newItemArea">
+		    <label for="name">选择图文消息</label>
+		    <div class="dropdown">
+			    <button type="button" class="btn dropdown-toggle" id="dropdownNews" data-toggle="dropdown">
+			    	<span class="js-text">{{item}}</span>
+			        <span class="caret"></span>
+			    </button>
+			    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownNews">
+			    	{{#each newsItems}}
+				        <li role="presentation">
+				            <a role="menuitem" tabindex="-1" href="#" value="{{this.url}}">{{this.title}}</a>
+				        </li>
+			        {{/each}}
+			    </ul>
+			    <input type="hidden" name="url" hiddenType="dropdownNews" value="{{url}}" />
+			</div>
+			
+		  </div>
+		  <div class="form-group hidden js-view" id="urlArea">
+		    <label for="url">跳转外部链接地址</label>
+		    <input type="text" class="form-control" id="url" placeholder="要跳转的外部链接地址"  value="{{url}}">
+		  </div>
+	</script>  
+	<!-- end page container -->
+#include("/control/common.vm")
+<script src="../static/comm/handlebars.js"></script>
+<script src="../static/comm/mui/js/mui.min.js"></script>
+<script src="../static/js/tool.js"></script>
+<script src="../static/js/back/sub.js"></script>

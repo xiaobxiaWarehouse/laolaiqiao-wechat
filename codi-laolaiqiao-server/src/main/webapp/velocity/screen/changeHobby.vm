@@ -1,0 +1,32 @@
+<form action="/user/saveUser" method="post" name="user">
+	<input type="hidden" id="userId" name="userId" value="$user.userId">
+	<input type="hidden" id="openId" name="openId" value="$user.openId" />
+	<div class="mui-content">
+		<div class="mui-input-group">
+			<div class="mui-input-row hobby-row">
+				<div class="row-title hobby-title">您的个人爱好是：</div>
+				<div class="hobby">
+					#set ($hobbyArray = $user.hobby.split(","))
+					
+					#foreach($hobby in $!hobbies)
+						#set ($hobbySelected = "") 
+						#foreach($userHobby in $!hobbyArray)
+							#if($userHobby == $hobby.constKey)
+								#set ($hobbySelected = "mui-badge-selected") 
+							#end
+						#end
+						<span class="mui-badge $hobbySelected">$hobby.constKey</span>
+					#end
+				</div>
+				<input type="hidden" name="hobby" id="hobby" value="$user.hobby">
+			</div>
+		</div>
+		
+		<div class="mui-content-padded">
+			<a class="mui-btn mui-btn-block mui-btn-primary" onclick="javascript:saveUser($('form'))">保存</a>
+		</div>
+	</div>
+</form>	
+
+<script src="../static/js/userCommon.js"></script>
+

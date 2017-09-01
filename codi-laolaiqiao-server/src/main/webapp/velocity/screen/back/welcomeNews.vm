@@ -1,0 +1,124 @@
+#set($layout="/layout/menu.vm")
+<!-- begin #page-container -->
+	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
+		<!-- begin #header -->
+		<div id="header" class="header navbar navbar-default navbar-fixed-top">
+			<!-- begin container-fluid -->
+			<div class="container-fluid">
+				<!-- begin mobile sidebar expand / collapse button -->
+				<div class="navbar-header">
+					<a href="javascript:void(0);" class="navbar-brand"><span class="navbar-logo"></span>老来俏管理后台</a>
+					<button type="button" class="navbar-toggle" data-click="sidebar-toggled">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<!-- end mobile sidebar expand / collapse button -->
+				
+				<!-- begin header navigation right -->
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown navbar-user">
+						<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+							<img src="../static/assets/img/user-13.jpg" alt="" /> 
+							<span class="hidden-xs">laolaiqiao-admin</span></b>
+						</a>
+					</li>
+				</ul>
+				<!-- end header navigation right -->
+			</div>
+			<!-- end container-fluid -->
+		</div>
+		<!-- end #header -->
+		
+		<!-- begin #sidebar -->
+		<div id="sidebar" class="sidebar">
+			<!-- begin sidebar scrollbar -->
+			<div data-scrollbar="true" data-height="100%">
+				<!-- begin sidebar user -->
+				<ul class="nav">
+					<li class="nav-profile">
+						<div class="image">
+							<a href="javascript:void(0);"><img src="../static/assets/img/user-13.jpg" alt="" /></a>
+						</div>
+						<div class="info">laolaiqiao-admin</div>
+					</li>
+				</ul>
+				<!-- end sidebar user -->
+				<!-- begin sidebar nav -->
+				<ul class="nav">
+					<li class="nav-header">菜单</li>
+					<li class="has-sub #if($menu == 'top')active #end">
+						<a href="showTopMenu">
+						    <i class="fa fa-suitcase"></i>
+						    <span>一级菜单</span> 
+						</a>
+					</li>
+					<li class="has-sub #if($menu == 'sub')active #end">
+						<a href="showSubMenu">
+							<i class="fa fa-inbox"></i> 
+							<span>二级菜单</span>
+						</a>
+					</li>
+					<li class="has-sub #if($menu == 'wechatRegister')active #end">
+						<a href="showWelcomeNews">
+							<i class="fa fa-inbox"></i> 
+							<span>注册地址</span>
+						</a>
+					</li>
+					<li class="has-sub #if($menu == 'showNewsSearch')active #end">
+						<a href="showNewsSearch">
+							<i class="fa fa-inbox"></i> 
+							<span>图文搜索</span>
+						</a>
+					</li>
+					<li class="has-sub #if($menu == 'userStatistics')active #end">
+						<a href="showUserStatistics">
+							<i class="fa fa-inbox"></i> 
+							<span>用户统计</span>
+						</a>
+					</li>
+			        <!-- begin sidebar minify button -->
+					<li><a href="javascript:void(0);" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
+			        <!-- end sidebar minify button -->
+				</ul>
+				<!-- end sidebar nav -->
+			</div>
+			<!-- end sidebar scrollbar -->
+		</div>
+		<div class="sidebar-bg"></div>
+		<!-- end #sidebar -->
+		
+		<!-- begin #content -->
+		<div id="content" class="content">
+			<form action="../news/saveWelcome" method="POST">
+                <fieldset>
+                    <legend>注册地址</legend>
+                    <div class="form-group">
+                        <label for="title">标题</label>
+                        <input type="text" class="form-control" id="title" name="newsTitle" placeholder="请填写标题" value="$!{news.newsTitle}" />
+                    </div>
+                    <div class="form-group">
+                        <label for="description">描述</label>
+                        <input type="text" class="form-control" id="description" name="newsDescription" placeholder="请填写描述" value="$!{news.newsDescription}" />
+                    </div>
+                    <div class="form-group">
+                        <label for="picUrl">图片地址</label>
+                        <input type="text" class="form-control" id="picUrl" name="newsPicurl" placeholder="请填写微信公众平台上的图片地址" value="$!{news.newsPicurl}" />
+                    </div>
+                    <button type="button" id="submit" class="btn btn-sm btn-primary m-r-5">保存</button>
+                    <input type="hidden" name="id" value="$!{news.id}" />
+                </fieldset>
+            </form>
+		</div>
+		<!-- end #content -->
+		
+		<!-- begin scroll to top btn -->
+		<a href="javascript:void(0);" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+		<!-- end scroll to top btn -->
+	</div>
+	
+	<!-- end page container -->
+#include("/control/common.vm")
+<script src="../static/js/tool.js"></script>
+<script src="../static/js/back/welcome.js"></script>

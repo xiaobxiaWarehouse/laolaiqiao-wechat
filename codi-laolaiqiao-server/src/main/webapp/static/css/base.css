@@ -1,0 +1,110 @@
+* {
+    font-family: microsoft yahei;
+}
+
+html {
+	height:100%;
+}
+
+/**=============== 注册 页面 开始================ */
+.reg-step2 {
+	padding-top:16px;
+	padding-bottom: 16px;
+}
+
+.row-title {
+	color:#6d9f12;
+	background-color:#ebebeb;
+	padding: 15px 0 0px 20px;
+}
+
+.hobby-title {
+	background-color:#fff;
+}
+
+.mui-input-group > .hobby-row {
+	height:150px;
+}
+
+.reg-step2 .mui-input-row {
+	height:150px;
+	border:none;
+}
+
+.reg-step2 > .mui-input-row:after {
+	height:0;
+}
+
+.mui-input-row .hobby {
+	margin:10px 20px;
+}
+
+.mui-badge {
+	margin-top:10px;
+	background-color: #fff;
+	border:1px solid #d1d1d1;
+	padding: 4px 9px;
+}
+
+.mui-badge-selected {
+	background-color: #1cb7f0;
+	border:1px solid #1cb7f0;
+	color:#fff;
+}
+
+/**=============== 注册 页面 结束================ */
+
+/**=============== 用户信息展示页面 结束================ */
+.mui-table-view {
+	margin-top:40px;
+}
+
+.modify-title {
+	height:40px;
+}
+
+.modify-btn {
+	margin-top: 4px;
+    margin-right: 20px;
+}
+
+.icon-user {
+	width:30px;
+	height:30px;
+	display:inline-block;
+	background: url(../image/icon-user.png) center center no-repeat;
+}
+
+.user-text {
+	position: relative;
+    bottom: 9px;
+    left: 6px;
+    color:#999999;
+}
+
+.mui-table-view .mui-pull-right {
+	color:#999999;
+}
+
+/**=============== 用户信息展示页面 结束================ */
+
+
+/********* @override MUI *********/
+.mui-input-group .mui-input-row:after,
+.mui-table-view-cell:after {
+	left: 0px;
+}
+
+.mui-table-view .mui-media-object {
+	max-width:100%;
+}
+
+.mui-badge {
+	cursor:pointer;
+	font-size:16px;
+}
+
+.mui-btn-blue, .mui-btn-primary, input[type=submit] {
+	border: 1px solid #1eb9f2;
+    background-color: #1eb9f2;
+}
